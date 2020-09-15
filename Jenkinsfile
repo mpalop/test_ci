@@ -9,8 +9,7 @@ pipeline {
         echo "testing... $BRANCH_NAME"
         echo "change ID $CHANGE_ID"
         echo "GIT_COMMIT $GIT_COMMIT"
-        echo "will simulate a failure"
-        exit -1 
+        echo "now it will work"
       }
     }
   }
