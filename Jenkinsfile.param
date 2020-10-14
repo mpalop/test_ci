@@ -1,0 +1,29 @@
+def whatBuild() {
+    
+}
+
+
+pipeline {
+  agent any
+  //parameters {
+  //      string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+  //      text(name: 'BIOGRAPHY', defaultValue: '', description: 'Enter some information about the person')
+  //      booleanParam(name: 'TOGGLE', defaultValue: true, description: 'Toggle this value')
+  //      choice(name: 'CHOICE', choices: ['One', 'Two', 'Three'], description: 'Pick something')
+  //}
+  stages {
+    stage ("Tests") {
+      steps {
+        sh 'touch last_commit.txt'  
+        def data = readFile('last_commit.txt')
+        echo "testing... $BRANCH_NAME"
+        echo "change ID $CHANGE_ID"
+        echo "GIT_COMMIT $GIT_COMMIT"
+        echo "now it will work"
+        writeFile(file: "last_commit.txt", text: "${env.GIT_COMMIT}")
+
+
+      }
+    }
+  }
+}
