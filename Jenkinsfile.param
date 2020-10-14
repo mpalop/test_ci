@@ -1,8 +1,3 @@
-def whatBuild() {
-    
-}
-
-
 pipeline {
   agent any
   //parameters {
@@ -11,18 +6,14 @@ pipeline {
   //      booleanParam(name: 'TOGGLE', defaultValue: true, description: 'Toggle this value')
   //      choice(name: 'CHOICE', choices: ['One', 'Two', 'Three'], description: 'Pick something')
   //}
+  // this is it! "${env.GIT_COMMIT}" to save as last processed commit. just post -> success 
   stages {
     stage ("Tests") {
       steps {
         sh 'touch last_commit.txt'  
         def data = readFile('last_commit.txt')
-        echo "testing... $BRANCH_NAME"
-        echo "change ID $CHANGE_ID"
-        echo "GIT_COMMIT $GIT_COMMIT"
-        echo "now it will work"
-        writeFile(file: "last_commit.txt", text: "${env.GIT_COMMIT}")
-
-
+        println "last commit is ${data}"
+        writeFile(file: "last_commit.txt", text: data)
       }
     }
   }
